@@ -397,10 +397,21 @@ export default function HomePage() {
       </section>
 
       <footer className={styles.footer}>
-        <span>Marca de agua por WynnDev</span>
-        <a href="https://github.com/NyoWynn" target="_blank" rel="noreferrer">
-          github.com/NyoWynn
-        </a>
+        <div className={styles.footerBadge}>
+          <Image
+            src="/wynnDevLogo.png"
+            alt="WynnDev"
+            width={112}
+            height={34}
+            className={styles.footerLogo}
+          />
+          <div className={styles.footerCopy}>
+            <span>Marca de agua por WynnDev</span>
+            <a href="https://github.com/NyoWynn" target="_blank" rel="noreferrer">
+              github.com/NyoWynn
+            </a>
+          </div>
+        </div>
       </footer>
     </main>
   );

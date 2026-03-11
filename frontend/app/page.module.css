@@ -531,17 +531,44 @@
   position: relative;
   z-index: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  margin-top: 16px;
-  text-align: center;
+  justify-content: center;
+  margin-top: 18px;
   color: #191919;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
-.footer a {
-  font-weight: 700;
+.footerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(250, 246, 251, 0.72);
+  border: 1px solid rgba(174, 157, 192, 0.42);
+  box-shadow: 0 8px 18px rgba(73, 79, 119, 0.08);
+}
+
+.footerLogo {
+  width: auto;
+  height: 30px;
+  object-fit: contain;
+}
+
+.footerCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  line-height: 1.1;
+}
+
+.footerCopy span {
+  font-size: 0.88rem;
+}
+
+.footerCopy a {
+  font-size: 1rem;
+  font-weight: 800;
 }
 
 @media (max-width: 1080px) {
@@ -622,5 +649,15 @@
   .previewHeader {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .footerBadge {
+    flex-direction: column;
+    text-align: center;
+    border-radius: 22px;
+  }
+
+  .footerCopy {
+    align-items: center;
   }
 }
