@@ -406,7 +406,7 @@ export default function HomePage() {
             className={styles.footerLogo}
           />
           <div className={styles.footerCopy}>
-            <span>Marca de agua por WynnDev</span>
+            <span>Dev by</span>
             <a href="https://github.com/NyoWynn" target="_blank" rel="noreferrer">
               github.com/NyoWynn
             </a>

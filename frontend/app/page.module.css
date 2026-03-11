@@ -540,34 +540,36 @@
 .footerBadge {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 12px 18px;
+  gap: 12px;
+  padding: 10px 18px;
   border-radius: 999px;
-  background: rgba(250, 246, 251, 0.72);
+  background: rgba(248, 244, 250, 0.92);
   border: 1px solid rgba(174, 157, 192, 0.42);
   box-shadow: 0 8px 18px rgba(73, 79, 119, 0.08);
 }
 
 .footerLogo {
   width: auto;
-  height: 30px;
+  height: 28px;
   object-fit: contain;
 }
 
 .footerCopy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
 }
 
 .footerCopy span {
-  font-size: 0.88rem;
+  color: #5e5575;
+  font-size: 0.96rem;
+  font-style: italic;
 }
 
 .footerCopy a {
-  font-size: 1rem;
+  color: #1f1f1f;
+  font-size: 0.96rem;
   font-weight: 800;
 }
 
@@ -658,6 +660,8 @@
   }
 
   .footerCopy {
+    flex-direction: column;
     align-items: center;
+    gap: 4px;
   }
 }
