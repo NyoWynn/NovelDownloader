@@ -105,7 +105,7 @@ class NovelScraper:
                 response = self.session.get(url, timeout=30)
                 response.raise_for_status()
                 time.sleep(self.delay)
-                return BeautifulSoup(response.text, "lxml")
+                return BeautifulSoup(response.text, "html.parser")
             except requests.RequestException as exc:
                 self._log(f"Intento {attempt}/{retries} fallido: {exc}")
                 if attempt < retries:
