@@ -1,288 +1,608 @@
-.page {
-  width: min(1180px, calc(100vw - 40px));
-  margin: 0 auto;
-  padding: 48px 0 56px;
+.pageShell {
+  min-height: 100vh;
+  padding: 22px 22px 40px;
+  position: relative;
 }
 
-.hero {
-  padding: 44px;
-  border: 1px solid rgba(123, 76, 41, 0.16);
-  border-radius: 32px;
+.topBand {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 120px;
+  background: linear-gradient(180deg, #7588ba 0%, #697db1 100%);
+}
+
+.heroCard,
+.panel {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(249, 246, 251, 0.96), rgba(245, 240, 247, 0.96));
+  border: 1px solid rgba(174, 157, 192, 0.55);
+  box-shadow:
+    0 14px 28px rgba(73, 79, 119, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.heroCard {
+  width: min(980px, calc(100vw - 64px));
+  margin: 0 auto 22px;
+  border-radius: 30px;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  overflow: hidden;
+}
+
+.heroArt {
+  position: relative;
+  min-height: 132px;
+  display: grid;
+  place-items: center;
   background:
-    linear-gradient(135deg, rgba(255, 250, 240, 0.92), rgba(247, 236, 216, 0.94)),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23d4b793' stroke-width='1' opacity='0.25'%3E%3Cpath d='M0 30h180M0 90h180M0 150h180'/%3E%3Cpath d='M30 0v180M90 0v180M150 0v180'/%3E%3C/g%3E%3C/svg%3E");
-  box-shadow: var(--shadow);
+    linear-gradient(180deg, rgba(202, 177, 214, 0.65), rgba(132, 151, 203, 0.95)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
 }
 
-.hero h1 {
-  margin: 10px 0 12px;
-  font-size: clamp(2.6rem, 5vw, 4.8rem);
-  line-height: 0.95;
+.heroArtGlow {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.24);
+  transform: rotate(-8deg);
 }
 
-.hero p {
+.heroLogo {
+  position: relative;
+  z-index: 1;
+  width: 108px;
+  height: auto;
+  object-fit: contain;
+  filter: saturate(0.45) opacity(0.88);
+}
+
+.heroCopy {
+  padding: 28px 34px 24px 18px;
+}
+
+.heroCopy h1 {
   margin: 0;
-  max-width: 58ch;
-  color: var(--muted);
-  font-size: 1.08rem;
-  line-height: 1.7;
+  color: #61719f;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
-.heroBadge,
-.kicker,
-.rangeChip,
-.statusPill,
-.genre {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  width: fit-content;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.76rem;
+.heroCopy p {
+  margin: 10px 0 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.3;
+  color: #202020;
+  max-width: 60ch;
 }
 
-.heroBadge,
-.rangeChip,
-.statusPill,
-.genre {
-  border-radius: 999px;
-  border: 1px solid rgba(159, 79, 47, 0.22);
-  background: rgba(255, 248, 236, 0.85);
-  padding: 8px 12px;
+.mainGrid {
+  position: relative;
+  z-index: 1;
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.06fr 1fr;
+  gap: 22px;
 }
 
-.grid,
-.preview {
+.leftColumn,
+.rightColumn {
   display: grid;
   gap: 22px;
-  margin-top: 24px;
+  align-content: start;
 }
 
-.grid {
-  grid-template-columns: 1.05fr 0.95fr;
-}
-
-.preview {
-  grid-template-columns: 0.9fr 1.1fr;
-}
-
-.card,
-.bookCard,
-.listCard,
-.jobCard {
+.panel {
   border-radius: 28px;
-  border: 1px solid rgba(123, 76, 41, 0.14);
-  background: rgba(255, 250, 240, 0.88);
-  box-shadow: var(--shadow);
+  padding: 20px 22px;
 }
 
-.card,
-.listCard,
-.jobCard {
-  padding: 26px;
+.inputPanel {
+  background: linear-gradient(180deg, rgba(220, 207, 232, 0.92), rgba(225, 214, 235, 0.92));
+  border-color: rgba(180, 159, 198, 0.85);
 }
 
-.bookCard {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 20px;
-  padding: 26px;
-}
-
-.sectionHeader {
+.panelTitleRow {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-
-.sectionHeader h2,
-.bookMeta h2 {
-  margin: 4px 0 0;
-  font-size: 2rem;
-}
-
-.kicker {
-  color: var(--accent);
-}
-
-.label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 0.95rem;
-  color: var(--muted);
-}
-
-.urlBox {
-  width: 100%;
-  min-height: 130px;
-  padding: 18px;
-  border-radius: 20px;
-  border: 1px solid var(--line);
-  background: #fffdf8;
-  resize: vertical;
-}
-
-.controls {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.controls label {
-  display: grid;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.controls input,
-.controls select {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  background: #fffdf8;
-}
-
-.primaryButton,
-.secondaryButton {
-  display: inline-flex;
-  justify-content: center;
   align-items: center;
-  min-height: 50px;
-  padding: 0 20px;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.panelIcon {
+  font-size: 1.25rem;
+  color: #6a4d73;
+}
+
+.panelTitleRow h2 {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: #121212;
+}
+
+.urlCard {
+  background: rgba(255, 255, 255, 0.82);
+  border: 3px solid rgba(192, 173, 203, 0.8);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.urlInput {
+  width: 100%;
+  min-height: 76px;
+  resize: none;
+  border-radius: 22px;
+  border: 3px solid rgba(192, 173, 203, 0.8);
+  background: linear-gradient(180deg, rgba(244, 239, 247, 0.98), rgba(238, 231, 241, 0.98));
+  padding: 16px 18px;
+  color: #171717;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.urlInput:focus,
+.field input:focus,
+.field select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(117, 135, 188, 0.18);
+}
+
+.ctaButton,
+.generateButton,
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: min(100%, 342px);
+  min-height: 62px;
   border: 0;
   border-radius: 999px;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
+  transition: transform 120ms ease, opacity 120ms ease;
 }
 
-.primaryButton {
-  background: var(--accent);
-  color: #fffaf5;
+.ctaButton:hover,
+.generateButton:hover,
+.downloadButton:hover {
+  transform: translateY(-1px);
 }
 
-.secondaryButton {
-  background: #efe1cd;
-  color: var(--ink);
-}
-
-.primaryButton:disabled,
-.secondaryButton:disabled {
-  opacity: 0.45;
+.ctaButton:disabled,
+.generateButton:disabled {
   cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
 }
 
-.coverFrame {
-  position: relative;
+.ctaButton {
+  margin: 22px auto 0;
+  background: linear-gradient(180deg, #7f90bc 0%, #6377ac 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 6px 12px rgba(79, 89, 136, 0.26);
+  color: #f8f5ff;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+}
+
+.ctaIcon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.jobPanel {
+  min-height: 230px;
+}
+
+.jobHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.jobHeader h3 {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 1.2rem;
+  color: #111;
+}
+
+.jobHeadline {
+  margin-top: 26px;
+  color: #61719f;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+.statusBadge {
+  width: 88px;
+  height: 88px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  text-align: center;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  transform: rotate(12deg);
+  border: 3px solid rgba(182, 168, 198, 0.9);
+  box-shadow: 0 8px 16px rgba(83, 92, 137, 0.16);
+}
+
+.statusRunning {
+  background: radial-gradient(circle at 30% 30%, #faf8fc, #e6e0ed);
+  color: #1f1f28;
+}
+
+.statusDone {
+  background: radial-gradient(circle at 30% 30%, #f1fff8, #d9efe3);
+  color: #226749;
+}
+
+.statusFailed {
+  background: radial-gradient(circle at 30% 30%, #fff4f4, #f0d6d6);
+  color: #9d3030;
+}
+
+.statusSpinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px dotted rgba(181, 171, 198, 0.8);
+}
+
+.progressTrack {
+  margin-top: 18px;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: 20px;
+  height: 30px;
+  padding: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(240, 234, 244, 0.95), rgba(229, 221, 236, 0.95));
+  border: 3px solid rgba(205, 193, 214, 0.8);
+}
+
+.progressValue {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #6d81b8 0%, #6377ac 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.jobText {
+  margin: 12px 0 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.98rem;
+  color: #111;
+}
+
+.downloadButton,
+.generateButton {
+  width: 100%;
+  margin-top: 18px;
+  background: linear-gradient(180deg, #7f90bc 0%, #6377ac 100%);
+  color: #faf8ff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 6px 12px rgba(79, 89, 136, 0.2);
+  font-size: 1.15rem;
+}
+
+.generateIcon {
+  font-size: 1.25rem;
+}
+
+.configGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #181818;
+  font-size: 0.97rem;
+}
+
+.field span {
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 3px solid rgba(191, 177, 208, 0.8);
+  background: linear-gradient(180deg, rgba(243, 238, 247, 0.98), rgba(236, 230, 241, 0.98));
+  padding: 0 16px;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 1rem;
+}
+
+.previewPanel {
+  padding-top: 10px;
+}
+
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sectionEyebrow {
+  display: inline-block;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.chapterCountPill {
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: rgba(238, 232, 242, 0.9);
+  color: #1d1d1d;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.previewGrid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+.coverBlock {
+  display: grid;
+  grid-template-columns: minmax(150px, 182px) 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.coverCard {
+  border-radius: 22px;
   overflow: hidden;
-  background: linear-gradient(180deg, #f7ebd8, #ddc1a0);
+  min-height: 270px;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(252, 219, 229, 0.9), transparent 28%),
+    radial-gradient(circle at 86% 16%, rgba(198, 227, 246, 0.92), transparent 24%),
+    radial-gradient(circle at 28% 86%, rgba(215, 237, 249, 0.95), transparent 22%),
+    linear-gradient(180deg, #f8e9ef 0%, #eff6fb 100%);
+  border: 1px solid rgba(213, 198, 223, 0.85);
 }
 
 .coverImage {
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: cover;
 }
 
 .coverFallback {
+  width: 100%;
+  height: 100%;
+  min-height: 270px;
   display: grid;
   place-items: center;
-  height: 100%;
-  color: var(--muted);
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #5e6e9e;
 }
 
-.bookMeta p,
-.muted {
-  color: var(--muted);
+.coverMeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
 }
 
-.genreRow {
+.coverMeta h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3vw, 3.4rem);
+  line-height: 0.95;
+}
+
+.coverMeta p {
+  margin: 14px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  color: #403739;
+}
+
+.genreList {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
-.chapterList {
+.genreChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 8px 14px;
+  border: 1px solid rgba(209, 167, 153, 0.85);
+  background: rgba(250, 244, 241, 0.88);
+  color: #2f2021;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.83rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.chapterBlock {
+  min-width: 0;
+}
+
+.chapterTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.chapterTitleRow h3 {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+}
+
+.chapterScroller {
+  max-height: 275px;
+  overflow: auto;
+  padding-right: 8px;
   display: grid;
   gap: 10px;
-  max-height: 420px;
-  overflow: auto;
-  padding-right: 4px;
 }
 
-.chapterItem {
+.chapterRow {
   display: grid;
-  grid-template-columns: 68px 1fr;
-  gap: 14px;
-  align-items: start;
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(242, 232, 216, 0.7);
+  grid-template-columns: 26px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(224, 210, 235, 0.95), rgba(233, 225, 239, 0.95));
+  padding: 0 12px;
 }
 
-.chapterItem span {
-  color: var(--accent);
-  font-weight: 700;
+.chapterRowIcon {
+  color: #775f87;
 }
 
-.chapterItem p {
-  margin: 0;
-  line-height: 1.45;
-}
-
-.jobCard {
-  margin-top: 24px;
-}
-
-.progressBar {
-  width: 100%;
-  height: 14px;
-  border-radius: 999px;
+.chapterRowText {
   overflow: hidden;
-  background: rgba(159, 79, 47, 0.12);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 1rem;
 }
 
-.progressBar div {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), #d07845);
+.chapterEmpty {
+  padding: 18px 0;
+  color: #5d5971;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
-.statusPill {
-  color: var(--accent-dark);
-}
-
-.error {
-  margin-top: 14px;
+.errorText {
+  margin: 12px 4px 0;
   color: #9f2f2f;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
 .footer {
+  position: relative;
+  z-index: 1;
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 28px;
-  color: var(--muted);
-  font-size: 0.95rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 14px;
+  text-align: center;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #181818;
 }
 
-@media (max-width: 960px) {
-  .grid,
-  .preview,
-  .bookCard {
+.footer a {
+  font-weight: 700;
+}
+
+@media (max-width: 1180px) {
+  .previewGrid,
+  .coverBlock {
     grid-template-columns: 1fr;
   }
 
-  .controls,
-  .footer,
-  .sectionHeader {
+  .coverMeta h3 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .mainGrid,
+  .configGrid,
+  .heroCard {
     grid-template-columns: 1fr;
+  }
+
+  .heroArt {
+    min-height: 152px;
+  }
+
+  .heroCopy {
+    padding: 20px 22px 24px;
+    text-align: center;
+  }
+
+  .heroCopy p {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .pageShell {
+    padding: 16px 14px 30px;
+  }
+
+  .topBand {
+    height: 96px;
+  }
+
+  .heroCard {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .panel {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .ctaButton,
+  .generateButton,
+  .downloadButton {
+    width: 100%;
+    min-height: 54px;
+  }
+
+  .jobHeader {
     flex-direction: column;
+  }
+
+  .statusBadge {
+    width: 76px;
+    height: 76px;
+    font-size: 0.82rem;
+  }
+
+  .coverMeta h3 {
+    font-size: 2.1rem;
+  }
+
+  .chapterRowText {
+    font-size: 0.94rem;
   }
 }

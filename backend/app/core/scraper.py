@@ -57,6 +57,94 @@ def rewrite_link_to_wayback(href: str, base_wayback: str, timestamp: str) -> str
     return urljoin(base_wayback, href)
 
 
+def _looks_like_placeholder_image(url: str) -> bool:
+    lowered = url.lower()
+    return (
+        not lowered
+        or lowered.startswith("data:image")
+        or "ll-logo" in lowered
+        or "logo-new" in lowered
+        or "logo" in lowered and "cover" not in lowered
+    )
+
+
+def _normalize_image_candidate(candidate: str, timestamp: str | None) -> str:
+    candidate = (candidate or "").strip()
+    if not candidate:
+        return ""
+    if candidate.startswith("data:image"):
+        return ""
+    if candidate.startswith("//"):
+        candidate = f"https:{candidate}"
+    if timestamp and candidate.startswith("http") and "web.archive.org" not in candidate:
+        candidate = to_wayback_url(candidate, timestamp)
+    return candidate
+
+
+def _extract_cover_url(soup: BeautifulSoup, timestamp: str | None) -> str | None:
+    selectors = [
+        ".summary_image img",
+        ".summary_image a img",
+        ".manga-thumbnail img",
+        ".summary_image img.img-responsive",
+        ".post-content_item .summary_image img",
+        ".site-content .summary_image img",
+    ]
+
+    for selector in selectors:
+        for image in soup.select(selector):
+            candidates = [
+                image.get("data-src"),
+                image.get("data-lazy-src"),
+                image.get("data-lazyload"),
+                image.get("src"),
+            ]
+
+            srcset = image.get("data-srcset") or image.get("srcset") or ""
+            if srcset:
+                candidates.extend(
+                    part.strip().split(" ")[0]
+                    for part in srcset.split(",")
+                    if part.strip()
+                )
+
+            for candidate in candidates:
+                normalized = _normalize_image_candidate(candidate or "", timestamp)
+                if normalized and not _looks_like_placeholder_image(normalized):
+                    return normalized
+    return None
+
+
+def _extract_genres(soup: BeautifulSoup) -> list[str]:
+    genres: list[str] = []
+    selectors = [
+        ".genres-content a",
+        ".manga-tags a",
+        ".post-content_item.genres a",
+        ".post-content_item .genres-content a",
+    ]
+
+    for selector in selectors:
+        for element in soup.select(selector):
+            value = element.get_text(strip=True)
+            if value and value not in genres:
+                genres.append(value)
+
+    if not genres:
+        for item in soup.select(".post-content_item"):
+            heading = item.select_one(".summary-heading h5")
+            if not heading:
+                continue
+            label = heading.get_text(" ", strip=True).lower()
+            if "genre" in label or "tag" in label:
+                for anchor in item.select("a"):
+                    value = anchor.get_text(strip=True)
+                    if value and value not in genres:
+                        genres.append(value)
+
+    return genres
+
+
 @dataclass
 class ChapterInfo:
     title: str
@@ -145,17 +233,8 @@ class NovelScraper:
                 for paragraph in description_element.find_all("p")
             ) or description_element.get_text(strip=True)
 
-        for element in soup.select(".genres-content a, .manga-tags a"):
-            metadata.genres.append(element.get_text(strip=True))
-
-        cover_element = soup.select_one(
-            ".summary_image img, .manga-thumbnail img, img.img-responsive"
-        )
-        if cover_element:
-            src = cover_element.get("src") or cover_element.get("data-src") or ""
-            if src and "web.archive.org" not in src and timestamp:
-                src = to_wayback_url(src, timestamp)
-            metadata.cover_url = src or None
+        metadata.genres = _extract_genres(soup)
+        metadata.cover_url = _extract_cover_url(soup, timestamp)
 
         metadata.chapters = self._extract_chapter_list(soup, url, timestamp)
         return metadata
