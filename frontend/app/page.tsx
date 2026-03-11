@@ -269,7 +269,10 @@ export default function HomePage() {
 
             <div className={styles.configGrid}>
               <label className={styles.field}>
-                <span>Desde capítulo</span>
+                <span className={styles.fieldLabel}>
+                  <span className={styles.fieldIcon}>🔢</span>
+                  Desde capítulo
+                </span>
                 <input
                   type="number"
                   min={1}
@@ -281,7 +284,10 @@ export default function HomePage() {
               </label>
 
               <label className={styles.field}>
-                <span>Hasta capítulo</span>
+                <span className={styles.fieldLabel}>
+                  <span className={styles.fieldIcon}>📚</span>
+                  Hasta capítulo
+                </span>
                 <input
                   type="number"
                   min={1}
@@ -293,7 +299,10 @@ export default function HomePage() {
               </label>
 
               <label className={styles.field}>
-                <span>Idioma</span>
+                <span className={styles.fieldLabel}>
+                  <span className={styles.fieldIcon}>🌐</span>
+                  Idioma
+                </span>
                 <select
                   value={language}
                   onChange={(event) =>
